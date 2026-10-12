@@ -52,6 +52,7 @@ public class InAppWebViewSettings: ISettings<InAppWebView> {
     var allowsPictureInPictureMediaPlayback = true
     var isFraudulentWebsiteWarningEnabled = true
     var selectionGranularity = 0
+    var writingToolsBehavior = 0 // UIWritingToolsBehavior.default
     var dataDetectorTypes: [String] = ["NONE"] // WKDataDetectorTypeNone
     var preferredContentMode = 0
     var sharedCookiesEnabled = false
@@ -191,6 +192,9 @@ public class InAppWebViewSettings: ISettings<InAppWebView> {
             if #available(iOS 16.4, *) {
                 realSettings["isInspectable"] = webView.isInspectable
                 realSettings["shouldPrintBackgrounds"] = configuration.preferences.shouldPrintBackgrounds
+            }
+            if #available(iOS 18.0, *) {
+                realSettings["writingToolsBehavior"] = configuration.writingToolsBehavior.rawValue
             }
         }
         return realSettings

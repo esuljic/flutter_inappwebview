@@ -23,6 +23,7 @@ import '../types/scrollview_deceleration_rate.dart';
 import '../types/selection_granularity.dart';
 import '../types/user_preferred_content_mode.dart';
 import '../types/vertical_scrollbar_position.dart';
+import '../types/writing_tools_behavior.dart';
 
 part 'in_app_webview_settings.g.dart';
 
@@ -1215,6 +1216,19 @@ as it can cause framerate drops on animations in Android 9 and lower (see [Hybri
   ])
   SelectionGranularity_? selectionGranularity;
 
+  ///How Writing Tools behave in the web view. Set [WritingToolsBehavior.NONE] to hide them,
+  ///including the floating button that appears over selected text.
+  ///It is read only when the web view is created; changing it later has no effect.
+  ///The default value is [WritingToolsBehavior.DEFAULT].
+  @SupportedPlatforms(platforms: [
+    IOSPlatform(
+        available: "18.0",
+        apiName: "WKWebViewConfiguration.writingToolsBehavior",
+        apiUrl:
+            "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/writingtoolsbehavior")
+  ])
+  WritingToolsBehavior_? writingToolsBehavior;
+
   ///Specifying a dataDetectoryTypes value adds interactivity to web content that matches the value.
   ///For example, Safari adds a link to “apple.com” in the text “Visit apple.com” if the dataDetectorTypes property is set to [DataDetectorTypes.LINK].
   ///The default value is [DataDetectorTypes.NONE].
@@ -2206,6 +2220,7 @@ as it can cause framerate drops on animations in Android 9 and lower (see [Hybri
     this.allowsPictureInPictureMediaPlayback = true,
     this.isFraudulentWebsiteWarningEnabled = true,
     this.selectionGranularity = SelectionGranularity_.DYNAMIC,
+    this.writingToolsBehavior = WritingToolsBehavior_.DEFAULT,
     this.dataDetectorTypes = const [DataDetectorTypes_.NONE],
     this.sharedCookiesEnabled = false,
     this.automaticallyAdjustsScrollIndicatorInsets = false,

@@ -723,6 +723,11 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate,
             if #available(iOS 15.0, *) {
                 configuration.upgradeKnownHostsToHTTPS = settings.upgradeKnownHostsToHTTPS
             }
+            
+            if #available(iOS 18.0, *) {
+                // A WKWebView keeps its own copy of the configuration, so this can't change after creation.
+                configuration.writingToolsBehavior = UIWritingToolsBehavior(rawValue: settings.writingToolsBehavior) ?? .default
+            }
         }
         
         return configuration
